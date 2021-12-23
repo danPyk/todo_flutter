@@ -37,6 +37,12 @@ dependencies:
   firebase_auth: ^3.3.4
   google_sign_in: ^5.2.1
 
+  injectable: ^1.5.0
+  get_it: ^7.2.0
+  injectable_generator: ^1.5.2
+  lint: ^1.8.1
+  provider: ^6.0.1
+
 
 
 
