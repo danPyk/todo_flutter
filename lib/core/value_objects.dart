@@ -8,6 +8,9 @@ abstract class ValueObject<T> {
 
   const ValueObject();
 
+  //shortcut for using either
+  bool isValid() => value.isRight();
+
   @override
   String toString() => 'ValueObjects($value)';
 
