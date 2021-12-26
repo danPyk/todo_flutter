@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:todo_flutter/core/failures.dart';
+import 'package:uuid/uuid.dart';
 
 @immutable
 abstract class ValueObject<T> {
@@ -22,4 +23,20 @@ abstract class ValueObject<T> {
 
   @override
   int get hashCode => value.hashCode;
+}
+
+class UniqueId extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory UniqueId() {
+    return UniqueId._(right(const Uuid().v1()));
+  }
+
+//used when we have existing id
+  factory UniqueId.fromString(String uniqueId) {
+    return UniqueId._(right(uniqueId));
+  }
+
+  const UniqueId._(this.value);
 }

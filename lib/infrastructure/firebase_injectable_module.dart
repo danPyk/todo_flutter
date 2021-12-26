@@ -1,9 +1,9 @@
-//class which helps register 3rd party modules with injectable
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
+//class which helps register 3rd party modules with injectable
 @module
 abstract class FirebaseInjectableModule{
   @lazySingleton

@@ -1,12 +1,16 @@
 //in infrastrucutre, becouse of dealing with 3rd party
+
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:todo_flutter/core/errors.dart';
+import 'package:todo_flutter/core/value_objects.dart';
 import 'package:todo_flutter/domain/auth/auth_failure.dart';
 import 'package:todo_flutter/domain/auth/i_auth_facade.dart';
+import 'package:todo_flutter/domain/auth/user.dart' as auth_user;
 import 'package:todo_flutter/domain/auth/value_objects.dart';
 
 @LazySingleton(as: IAuthFacade)
@@ -78,11 +82,35 @@ class FirebaseAuthFacade implements IAuthFacade {
           idToken: googleAuthentication.idToken,
           accessToken: googleAuthentication.accessToken);
 
-       return _firebaseAuth
+      return _firebaseAuth
           .signInWithCredential(authCredential)
           .then((value) => right(unit));
     } on PlatformException catch (_) {
       return left(const AuthFailure.serverError());
     }
+  }
+
+//todo added by myself
+  @override
+  Option<auth_user.User> getSignedInUser() {
+    final currentUser = _firebaseAuth.currentUser?.uid;
+
+    final logger = Logger();
+    logger.d(currentUser);
+
+    if (currentUser != null) {
+      return optionOf(auth_user.User(id(UniqueId.fromString(currentUser))));
+    } else {
+      return optionOf(null);
+    }
+  }
+
+  @override
+  Future<void> signOut() {
+    //wait is used just to wait for multiple methods finish
+    return Future.wait([
+      _googleSignIn.signOut(),
+      _firebaseAuth.signOut(),
+    ]);
   }
 }

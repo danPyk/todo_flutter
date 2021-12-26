@@ -5,6 +5,9 @@ import 'package:todo_flutter/injection.dart';
 import 'package:todo_flutter/presentation/widgets/sign_in_form.dart';
 
 class SignInPage extends StatelessWidget {
+
+  static String id = "sign_in_page";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

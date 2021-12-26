@@ -11,14 +11,15 @@ part 'sign_in_form_bloc.freezed.dart';
 part 'sign_in_form_event.dart';
 
 part 'sign_in_form_state.dart';
+
 @injectable
 class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   final IAuthFacade _iAuthFacade;
 
   SignInFormBloc(this._iAuthFacade) : super(SignInFormState.initial()) {
-    on<SignInFormEvent>((event, emit) {
-      event.map(emailChanged: (e) {
-        emit(state.copyWith(
+    on<SignInFormEvent>((event, emit)  async  {
+       await event.map(emailChanged: (e)  {
+         emit(state.copyWith(
           emailAddress: EmailAddress(e.email),
           //we are resetting email
           authFailureOrSuccess: none(),
@@ -28,7 +29,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
           password: Password(e.password),
           //we are resetting email
           authFailureOrSuccess: none(),
-        ));
+        ),);
       },
           //check if EmailAddress and Password are valid, if valid register by IAuthFacade nad emit Some<Right<Unit>> in authFailureOrSuccessOption
           registerWithEmailAndPasswordPressed: (e) async {
@@ -39,7 +40,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
           emit(state.copyWith(
             isSubmitting: true,
             authFailureOrSuccess: none(),
-          ));
+          ),);
           //register the user
           failureOrSuccess = await _iAuthFacade.registerWithEmailAndPassword(
               emailAddress: state.emailAddress, password: state.password);
@@ -71,7 +72,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
 
         }
         //when password or email is invalid:
-        emit(state.copyWith(
+         emit(state.copyWith(
           isSubmitting: false,
           showErrorMessages: true,
           //optionOf is equal to  failureOrSuccess == null ? none() : some(failureOrSuccess)
@@ -84,7 +85,8 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
           authFailureOrSuccess: none(),
         ));
         final failureOrSuccess = await _iAuthFacade.signInWithGoogle();
-        emit(state.copyWith(
+
+         emit(state.copyWith(
           isSubmitting: false,
           authFailureOrSuccess: some(failureOrSuccess),
         ));

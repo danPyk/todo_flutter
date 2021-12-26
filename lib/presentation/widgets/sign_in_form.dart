@@ -4,29 +4,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_flutter/application/auth/signInForm/sign_in_form_bloc.dart';
 
 class SignInForm extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignInFormBloc, SignInFormState>(
       listener: (context, state) {
-        // state.authFailureOrSuccessOption.fold(
+        // //used to show snackbar
+        // state.authFailureOrSuccess.fold(
         //       () {},
         //       (either) => either.fold(
         //         (failure) {
-        //       FlushbarHelper.createError(
-        //         message: failure.map(
-        //           cancelledByUser: (_) => 'Cancelled',
-        //           serverError: (_) => 'Server error',
-        //           emailAlreadyInUse: (_) => 'Email already in use',
-        //           invalidEmailAndPasswordCombination: (_) =>
-        //           'Invalid email and password combination',
-        //         ),
-        //       ).show(context);
+        //           GlobalSnackBar.show(context, failure.map(
+        //             cancelledByUser: (_) => 'Cancelled',
+        //             serverError: (_) => 'Server error',
+        //             emailAlreadyInUse: (_) => 'Email already in use',
+        //             invalidEmailAndPassword: (_) =>
+        //             'Invalid email and password combination',
+        //           ),);
+        //
+        //
         //     },
         //         (_) {
-        //       ExtendedNavigator.of(context).replace(Routes.notesOverviewPage);
-        //       context
-        //           .read()<AuthBloc>()
-        //           .add(const AuthEvent.authCheckRequested());
+        //
         //     },
         //   ),
         // );
@@ -130,7 +129,8 @@ class SignInForm extends StatelessWidget {
               ),
               if (state.isSubmitting) ...[
                 const SizedBox(height: 8),
-                const LinearProgressIndicator(value: null),
+                //todo parameter?
+                const LinearProgressIndicator(value: 1.0),
               ]
             ],
           ),
