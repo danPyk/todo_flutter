@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:todo_flutter/core/errors.dart';
 import 'package:todo_flutter/core/value_objects.dart';
 import 'package:todo_flutter/domain/auth/auth_failure.dart';
@@ -90,13 +89,9 @@ class FirebaseAuthFacade implements IAuthFacade {
     }
   }
 
-//todo added by myself
   @override
   Option<auth_user.User> getSignedInUser() {
     final currentUser = _firebaseAuth.currentUser?.uid;
-
-    final logger = Logger();
-    logger.d(currentUser);
 
     if (currentUser != null) {
       return optionOf(auth_user.User(id(UniqueId.fromString(currentUser))));

@@ -11,4 +11,21 @@ part 'failures.freezed.dart';
   const factory ValueFailure.shortPassword({
     required T failedValue,
   }) = ShortPassword<T>;
+
+  /// NOTES FAILURES
+  const factory ValueFailure.tooLongLength({
+    required T failedValue,
+    required int maxLength,
+  }) = TooLongLength<T>;
+  const factory ValueFailure.empty({
+    required T failedValue,
+  }) = Empty<T>;
+  const factory ValueFailure.multiline({
+    required T failedValue,
+  }) = Multiline<T>;
+  const factory ValueFailure.listTooLong({
+    required T failedValue,
+    required int max,
+  }) = ListTooLong<T>;
+
 }

@@ -15,7 +15,7 @@ analyzer:
     missing_return: error
 
     # allow having TODOs in code
-    todo: ignore
+    todo: true
 
     # Reassignment should be treated as warning (not a hint)
     parameter_assignments: warning
@@ -149,6 +149,7 @@ linter:
     #
     # http://dart-lang.github.io/linter/lints/avoid_final_parameters.html
     - avoid_final_parameters
+
 
     # Prevents allocating a lambda and allows return/break/continue control flow statements inside the loop
     #
@@ -427,7 +428,7 @@ linter:
     # Dart SDK: >=2.14.0-360.0.dev • (Linter v1.8.0)
     #
     # https://dart-lang.github.io/linter/lints/eol_at_end_of_file.html
-    - eol_at_end_of_file
+    #- eol_at_end_of_file
 
     # Enums aren't powerful enough, now enum like classes get the same linting support
     #
@@ -1020,7 +1021,7 @@ linter:
     # Highlights potential bugs where unrelated types are compared with another. (always *not* equal).
     #
     # https://dart-lang.github.io/linter/lints/unrelated_type_equality_checks.html
-    - unrelated_type_equality_checks
+    #- unrelated_type_equality_checks
 
     # Web only
     #

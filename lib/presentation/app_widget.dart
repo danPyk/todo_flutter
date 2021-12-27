@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_flutter/application/auth/auth_bloc.dart';
 import 'package:todo_flutter/presentation/sign_in/sign_in_page.dart';
-import 'package:todo_flutter/presentation/splash/splash_pagee.dart';
+import 'package:todo_flutter/presentation/splash/splash_page.dart';
 
 import '../injection.dart';
 
