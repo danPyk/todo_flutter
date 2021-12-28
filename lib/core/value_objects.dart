@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:todo_flutter/core/errors.dart';
 import 'package:todo_flutter/core/failures.dart';
+import 'package:todo_flutter/domain/notes/todo_item.dart';
 import 'package:uuid/uuid.dart';
 
 @immutable
@@ -11,6 +13,15 @@ abstract class ValueObject<T> {
 
   //shortcut for using either
   bool isValid() => value.isRight();
+
+  T getOrCrash() {
+    return value.fold((f) => throw UnexpectedValueError(f), (right) => right);
+  }
+
+  ///used to make ValueFailure type dynamic
+  Either<ValueFailure<dynamic>, Unit> get failureOrUnit{
+    return value.fold((l) => left(l), (r) => right(unit),);
+  }
 
   @override
   String toString() => 'ValueObjects($value)';

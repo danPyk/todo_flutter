@@ -20,6 +20,21 @@ class NoteBody extends ValueObject<String> {
   const NoteBody._(this.value);
 }
 
+class TodoName extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  static const maxLength = 30;
+
+  factory TodoName(String input) {
+    return TodoName._(
+      validateNoteBody(input, maxLength),
+    );
+  }
+
+  const TodoName._(this.value);
+}
+
 class NoteColor extends ValueObject<Color> {
   static const List<Color> predefinedColor = [
     Color(0xfffafafa), // canvas
@@ -43,11 +58,11 @@ class NoteColor extends ValueObject<Color> {
   const NoteColor._(this.value);
 }
 
-class MaxListSize extends ValueObject<List> {
+class ListMaxSize3<T> extends ValueObject<List<T>> {
   static const maxLength = 3;
 
   @override
-  final Either<ValueFailure<List>, List> value;
+  final Either<ValueFailure<List<T>>, List<T>> value;
 
   int get length {
     //check if
@@ -62,11 +77,11 @@ class MaxListSize extends ValueObject<List> {
     return length == maxLength;
   }
 
-  factory MaxListSize(List input) {
-    return MaxListSize._(
+  factory ListMaxSize3(List<T> input) {
+    return ListMaxSize3._(
       validateMaxListLength(input, maxLength),
     );
   }
 
-  const MaxListSize._(this.value);
+  const ListMaxSize3._(this.value);
 }

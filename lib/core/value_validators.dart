@@ -55,11 +55,12 @@ Either<ValueFailure<String>, String> validateIfSingleLine(
   }
 }
 
-Either<ValueFailure<List>, List> validateMaxListLength(
-    List input, int maxLength) {
+Either<ValueFailure<List<T>>, List<T>> validateMaxListLength<T>(
+    List<T> input, int maxLength) {
   if (input.length <= maxLength) {
     return right(input);
   } else {
     return left(ValueFailure.listTooLong(failedValue: input, max: maxLength));
   }
+
 }
