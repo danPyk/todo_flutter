@@ -26,7 +26,7 @@ class _$NoteDtoTearOff {
       required String body,
       required int color,
       required List<dynamic> todos,
-      @ServerTimestampConverter() required DateTime serverTimeStamp}) {
+      @ServerTimestampConverter() required FieldValue? serverTimeStamp}) {
     return _NoteDto(
       id: id,
       body: body,
@@ -56,7 +56,7 @@ mixin _$NoteDto {
   ///used to sort todos by date. Will be provided by firestore?
 //todo might be wrong
   @ServerTimestampConverter()
-  DateTime get serverTimeStamp => throw _privateConstructorUsedError;
+  FieldValue? get serverTimeStamp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -72,7 +72,7 @@ abstract class $NoteDtoCopyWith<$Res> {
       String body,
       int color,
       List<dynamic> todos,
-      @ServerTimestampConverter() DateTime serverTimeStamp});
+      @ServerTimestampConverter() FieldValue? serverTimeStamp});
 }
 
 /// @nodoc
@@ -111,7 +111,7 @@ class _$NoteDtoCopyWithImpl<$Res> implements $NoteDtoCopyWith<$Res> {
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as FieldValue?,
     ));
   }
 }
@@ -126,7 +126,7 @@ abstract class _$NoteDtoCopyWith<$Res> implements $NoteDtoCopyWith<$Res> {
       String body,
       int color,
       List<dynamic> todos,
-      @ServerTimestampConverter() DateTime serverTimeStamp});
+      @ServerTimestampConverter() FieldValue? serverTimeStamp});
 }
 
 /// @nodoc
@@ -166,7 +166,7 @@ class __$NoteDtoCopyWithImpl<$Res> extends _$NoteDtoCopyWithImpl<$Res>
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as FieldValue?,
     ));
   }
 }
@@ -201,7 +201,7 @@ class _$_NoteDto extends _NoteDto {
   ///used to sort todos by date. Will be provided by firestore?
 //todo might be wrong
   @ServerTimestampConverter()
-  final DateTime serverTimeStamp;
+  final FieldValue? serverTimeStamp;
 
   @override
   String toString() {
@@ -247,7 +247,7 @@ abstract class _NoteDto extends NoteDto {
           required String body,
           required int color,
           required List<dynamic> todos,
-          @ServerTimestampConverter() required DateTime serverTimeStamp}) =
+          @ServerTimestampConverter() required FieldValue? serverTimeStamp}) =
       _$_NoteDto;
   const _NoteDto._() : super._();
 
@@ -269,7 +269,7 @@ abstract class _NoteDto extends NoteDto {
   ///used to sort todos by date. Will be provided by firestore?
 //todo might be wrong
   @ServerTimestampConverter()
-  DateTime get serverTimeStamp;
+  FieldValue? get serverTimeStamp;
   @override
   @JsonKey(ignore: true)
   _$NoteDtoCopyWith<_NoteDto> get copyWith =>
