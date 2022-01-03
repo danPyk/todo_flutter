@@ -11,7 +11,7 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import 'application/auth/auth_bloc.dart' as _i9;
 import 'application/auth/signInForm/sign_in_form_bloc.dart' as _i8;
-import 'application/note_actor/note_actor_bloc.dart' as _i7;
+import 'application/notes/note_actor/note_actor_bloc.dart' as _i7;
 import 'domain/auth/i_auth_facade.dart' as _i5;
 import 'infrastructure/auth/firebase_auth_facade.dart' as _i6;
 import 'infrastructure/firebase_injectable_module.dart'

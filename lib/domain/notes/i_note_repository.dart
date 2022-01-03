@@ -10,7 +10,7 @@ abstract class INoteRepository {
   Stream<Either<NoteFailure, List<Note>>> watchUncompleted();
 
   //CUD. Why unit? Because CUD methods do not have return type
-  Stream<Either<NoteFailure, Unit>> create(Note note);
-  Stream<Either<NoteFailure, Unit>> update(Note note);
-  Stream<Either<NoteFailure, Unit>> delete(Note note);
+  Future<Either<NoteFailure, Unit>> create(Note note);
+  Future<Either<NoteFailure, Unit>> update(Note note);
+  Future<Either<NoteFailure, Unit>> delete(Note note);
 }
