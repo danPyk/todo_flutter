@@ -88,15 +88,16 @@ class FirebaseAuthFacade implements IAuthFacade {
       return left(const AuthFailure.serverError());
     }
   }
-
+//todo might by me
   @override
-  Option<auth_user.User> getSignedInUser() {
+  Future<Option<auth_user.User>> getSignedInUser() {
     final currentUser = _firebaseAuth.currentUser?.uid;
 
     if (currentUser != null) {
-      return optionOf(auth_user.User(id(UniqueId.fromString(currentUser))));
+      return Future.value(
+          optionOf(auth_user.User(id(UniqueId.fromString(currentUser)))));
     } else {
-      return optionOf(null);
+      return Future.value(optionOf(null));
     }
   }
 

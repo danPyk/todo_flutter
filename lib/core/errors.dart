@@ -11,3 +11,6 @@ class UnexpectedValueError extends Error{
     return Error.safeToString('Encountered a ValueFailure at unrecoverable point. Terminating. Faile was $valueFailure');
   }
 }
+
+class NotAuthenticatedError extends Error{
+}

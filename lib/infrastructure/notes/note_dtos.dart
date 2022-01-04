@@ -41,13 +41,13 @@ class NoteDto with _$NoteDto {
       id: note.id.getOrCrash(),
       body: note.noteBody.getOrCrash(),
       color: note.noteColor.getOrCrash().value,
-
       ///converts todos into TodoItemDto
       todos: note.maxListSize3
           .getOrCrash()
           .map(
             (todoItem) => TodoItemDto.fromDomain(todoItem),
           )
+      //todo might
           .toList(),
       serverTimeStamp: FieldValue.serverTimestamp(),
     );

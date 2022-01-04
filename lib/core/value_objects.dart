@@ -44,6 +44,12 @@ class UniqueId extends ValueObject<String> {
     return UniqueId._(right(const Uuid().v1()));
   }
 
+  factory UniqueId.fromUniqueString(String uniqueId) {
+    return UniqueId._(
+      right(uniqueId),
+    );
+  }
+
 //used when we have existing id
   factory UniqueId.fromString(String uniqueId) {
     return UniqueId._(right(uniqueId));

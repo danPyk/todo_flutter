@@ -27,7 +27,7 @@ class Note with _$Note {
       maxListSize3: List.empty() as ListMaxSize3<TodoItem> );
 
   /// validate whole Note
-  /// //todo not finished  [13, 35 min]
+//todo not finished  [13, 35 min]
   Option<ValueFailure<dynamic>> get failureOption{
     return noteBody.failureOrUnit.andThen(maxListSize3.failureOrUnit).fold((failure) => some(failure), (r) => none());
   }
