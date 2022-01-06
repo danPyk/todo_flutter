@@ -4,11 +4,11 @@ import 'package:injectable/injectable.dart';
 import 'package:todo_flutter/injection.dart';
 import 'package:todo_flutter/presentation/app_widget.dart';
 
-void main() async{
-  configureInjection(Environment.prod);
+void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp( AppWidget());
-}
+  configureInjection(Environment.prod);
 
+  runApp(AppWidget());
+}

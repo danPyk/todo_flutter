@@ -1,34 +1,42 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_flutter/application/auth/auth_bloc.dart';
 import 'package:todo_flutter/application/auth/signInForm/sign_in_form_bloc.dart';
+import 'package:todo_flutter/presentation/notes/note_overview/notes_overview_page.dart';
+
+import 'global_snackbar.dart';
 
 class SignInForm extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignInFormBloc, SignInFormState>(
       listener: (context, state) {
-        // //used to show snackbar
-        // state.authFailureOrSuccess.fold(
-        //       () {},
-        //       (either) => either.fold(
-        //         (failure) {
-        //           GlobalSnackBar.show(context, failure.map(
-        //             cancelledByUser: (_) => 'Cancelled',
-        //             serverError: (_) => 'Server error',
-        //             emailAlreadyInUse: (_) => 'Email already in use',
-        //             invalidEmailAndPassword: (_) =>
-        //             'Invalid email and password combination',
-        //           ),);
-        //
-        //
-        //     },
-        //         (_) {
-        //
-        //     },
-        //   ),
-        // );
+        /// show snackbar with error
+        state.authFailureOrSuccess.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              GlobalSnackBar.show(
+                context,
+                failure.map(
+                  cancelledByUser: (_) => 'Cancelled',
+                  serverError: (_) => 'Server error',
+                  emailAlreadyInUse: (_) => 'Email already in use',
+                  invalidEmailAndPassword: (_) =>
+                      'Invalid email and password combination',
+                ),
+              );
+            },
+
+            ///when user is signed in then navigate
+            (_) {
+              Navigator.pushReplacementNamed(context, NotesOverviewPage.id);
+              ///emit event
+              /////todo might
+              context.read<AuthBloc>().add(const AuthEvent.authCheckRequested());
+             },
+          ),
+        );
       },
       builder: (context, state) {
         return Form(
@@ -59,11 +67,11 @@ class SignInForm extends StatelessWidget {
                     .value
                     .fold(
                       (f) => f.maybeMap(
-                    invalidEmail: (_) => 'Invalid Email',
-                    orElse: () => null,
-                  ),
+                        invalidEmail: (_) => 'Invalid Email',
+                        orElse: () => null,
+                      ),
                       (_) => null,
-                ),
+                    ),
               ),
               const SizedBox(height: 8),
               TextFormField(
@@ -77,13 +85,13 @@ class SignInForm extends StatelessWidget {
                     .read<SignInFormBloc>()
                     .add(SignInFormEvent.passwordChanged(value)),
                 validator: (_) =>
-                    context.read<SignInFormBloc>().state.password.value.fold(
+                    context.watch<SignInFormBloc>().state.password.value.fold(
                           (f) => f.maybeMap(
-                        shortPassword: (_) => 'Short Password',
-                        orElse: () => null,
-                      ),
+                            shortPassword: (_) => 'Short Password',
+                            orElse: () => null,
+                          ),
                           (_) => null,
-                    ),
+                        ),
               ),
               const SizedBox(height: 8),
               Row(
@@ -91,10 +99,10 @@ class SignInForm extends StatelessWidget {
                   Expanded(
                     child: MaterialButton(
                       onPressed: () {
-                        context.read<SignInFormBloc>().add(
-                          const SignInFormEvent
-                              .signInWithEmailAndPasswordPressed(),
-                        );
+                        context.watch<SignInFormBloc>().add(
+                              const SignInFormEvent
+                                  .signInWithEmailAndPasswordPressed(),
+                            );
                       },
                       child: const Text('SIGN IN'),
                     ),
@@ -102,10 +110,10 @@ class SignInForm extends StatelessWidget {
                   Expanded(
                     child: MaterialButton(
                       onPressed: () {
-                        context.read<SignInFormBloc>().add(
-                          const SignInFormEvent
-                              .registerWithEmailAndPasswordPressed(),
-                        );
+                        context.watch<SignInFormBloc>().add(
+                              const SignInFormEvent
+                                  .registerWithEmailAndPasswordPressed(),
+                            );
                       },
                       child: const Text('REGISTER'),
                     ),

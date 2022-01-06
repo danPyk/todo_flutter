@@ -67,10 +67,10 @@ class NoteDto with _$NoteDto {
   factory NoteDto.fromJson(Map<String, dynamic> json) =>
       _$NoteDtoFromJson(json);
 
-  factory NoteDto.fromFirestore(DocumentSnapshot documentSnapshot) {
+
+  factory NoteDto.fromFirestore(DocumentSnapshot doc) {
     ///copyWith is for populate ID
-    return NoteDto.fromJson(documentSnapshot.data()! as Map<String, dynamic>)
-        .copyWith(id: documentSnapshot.id);
+    return NoteDto.fromJson(doc.data( )as Map<String, dynamic>).copyWith(id: doc.id) ;
   }
 
   //todo not finished

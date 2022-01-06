@@ -12,6 +12,7 @@ part 'note_actor_event.dart';
 
 part 'note_actor_state.dart';
 
+///used for deleting notes
 @injectable
 class NoteActorBloc extends Bloc<NoteActorEvent, NoteActorState> {
   late INoteRepository _iNoteRepository;

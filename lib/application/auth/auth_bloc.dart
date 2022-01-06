@@ -21,12 +21,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await event.map(authCheckRequested: (e) async {
 
         final userLoggedStatus = await _iAuthFacade.getSignedInUser();
-        emit(userLoggedStatus.fold(() => const AuthState.unAuthenticated(),
+        emit(userLoggedStatus.fold(() => const AuthState.unauthenticated(),
             (_) => const AuthState.authenticated()));
 
-      }, signOut: (e) async {
+      }, signedOut: (e) async {
         await _iAuthFacade.signOut();
-        emit(const AuthState.unAuthenticated());
+        emit(const AuthState.unauthenticated());
       });
     });
   }
