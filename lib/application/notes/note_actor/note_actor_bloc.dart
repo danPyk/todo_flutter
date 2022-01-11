@@ -20,7 +20,6 @@ class NoteActorBloc extends Bloc<NoteActorEvent, NoteActorState> {
   NoteActorBloc() : super(const NoteActorState.initial()) {
     on<NoteActorEvent>((event, emit) async {
       emit(const NoteActorState.actionInProgress());
-      //todo might need be awaited
       final possibleFailure = await _iNoteRepository.delete(event.note);
 
       emit(possibleFailure.fold((l) => NoteActorState.deleteFailure(l),

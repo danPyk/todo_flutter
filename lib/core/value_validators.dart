@@ -20,11 +20,10 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
 }
 
 /// NOTES VALIDATORS
-//todo might
+//todo MIGHT & SIMPLIFIED
 Either<ValueFailure<String>, String> validateNoteBody(
     String input, int maxLength) {
-  return validateStringNotEmpty(input, maxLength)
-      .andThen(validateMaxStringLength(input, maxLength)).andThen(validateIfSingleLine(input, maxLength));
+  return validateStringNotEmpty(input, maxLength);
 }
 
 Either<ValueFailure<String>, String> validateMaxStringLength(

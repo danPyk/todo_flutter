@@ -29,9 +29,9 @@ class NotesOverviewBody extends StatelessWidget {
               itemBuilder: (context, index) {
                 final note = state.notes[index];
                 if (note.failureOption.isSome()) {
-                  return ErrorNoteCard(note: note);
+                  return Container(height: 400, width: 400, color: Colors.red,);
                 } else {
-                  return ErrorNoteCard(note: note);
+                  return Container(height: 400, width: 400, color: Colors.red,);
                 }
               },
               itemCount: state.notes.length,

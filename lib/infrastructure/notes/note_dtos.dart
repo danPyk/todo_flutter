@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:todo_flutter/core/value_objects.dart';
-import 'package:todo_flutter/domain/auth/auth_failure.dart';
 import 'package:todo_flutter/domain/notes/note.dart';
 import 'package:todo_flutter/domain/notes/todo_item.dart';
 import 'package:todo_flutter/domain/notes/value_objects.dart';
@@ -14,10 +11,9 @@ part 'note_dtos.freezed.dart';
 //4 json serializable
 part 'note_dtos.g.dart';
 
-
 @freezed
 class NoteDto with _$NoteDto {
-  static  FieldValue defaultServerTimeStamp =  FieldValue.serverTimestamp();
+  static FieldValue defaultServerTimeStamp = FieldValue.serverTimestamp();
 
   //empty constructor, because of custom method usage
   const NoteDto._();
@@ -28,12 +24,11 @@ class NoteDto with _$NoteDto {
     required String id,
     required String body,
     required int color,
-    required List<dynamic> todos,
+    required List<TodoItemDto> todos,
 
     ///used to sort todos by date. Will be provided by firestore?
     //todo might be wrong
-     @ServerTimestampConverter() required
-        FieldValue? serverTimeStamp,
+    @ServerTimestampConverter() required FieldValue? serverTimeStamp,
   }) = _NoteDto;
 
   factory NoteDto.fromDomain(Note note) {
@@ -41,13 +36,14 @@ class NoteDto with _$NoteDto {
       id: note.id.getOrCrash(),
       body: note.noteBody.getOrCrash(),
       color: note.noteColor.getOrCrash().value,
+
       ///converts todos into TodoItemDto
       todos: note.maxListSize3
           .getOrCrash()
           .map(
             (todoItem) => TodoItemDto.fromDomain(todoItem),
           )
-      //todo might
+          //todo might
           .toList(),
       serverTimeStamp: FieldValue.serverTimestamp(),
     );
@@ -55,23 +51,22 @@ class NoteDto with _$NoteDto {
 
   Note toDomain() {
     return Note(
-        id: UniqueId.fromString(id),
-        noteBody: NoteBody(body),
-        noteColor: NoteColor(Color(color)),
-        //todo might
-        maxListSize3: ListMaxSize3(
-          todos.map((dto) => dto.toDomain()).toList() as List<TodoItem>,
-        ));
+      id: UniqueId.fromString(id),
+      noteBody: NoteBody(body),
+      noteColor: NoteColor(Color(color)),
+      //todo might
+      maxListSize3: ListMaxSize3(todos.map((dto) => dto.toDomain()).toList()),
+    );
   }
 
   factory NoteDto.fromJson(Map<String, dynamic> json) =>
       _$NoteDtoFromJson(json);
 
-
-  factory NoteDto.fromFirestore(DocumentSnapshot doc) {
-    ///copyWith is for populate ID
-    return NoteDto.fromJson(doc.data( )as Map<String, dynamic>).copyWith(id: doc.id) ;
-  }
+  // factory NoteDto.fromFirestore(DocumentSnapshot doc) {
+  //   ///copyWith is for populate ID
+  //   return NoteDto.fromJson(doc.data() as  )
+  //       .copyWith(id: doc.id);
+  // }
 
   //todo not finished
   static Map<String, dynamic> convertObjectToJson(Object? object) => {

@@ -25,7 +25,7 @@ class _$NoteDtoTearOff {
       {required String id,
       required String body,
       required int color,
-      required List<dynamic> todos,
+      required List<TodoItemDto> todos,
       @ServerTimestampConverter() required FieldValue? serverTimeStamp}) {
     return _NoteDto(
       id: id,
@@ -51,7 +51,7 @@ mixin _$NoteDto {
   String get id => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
   int get color => throw _privateConstructorUsedError;
-  List<dynamic> get todos => throw _privateConstructorUsedError;
+  List<TodoItemDto> get todos => throw _privateConstructorUsedError;
 
   ///used to sort todos by date. Will be provided by firestore?
 //todo might be wrong
@@ -71,7 +71,7 @@ abstract class $NoteDtoCopyWith<$Res> {
       {String id,
       String body,
       int color,
-      List<dynamic> todos,
+      List<TodoItemDto> todos,
       @ServerTimestampConverter() FieldValue? serverTimeStamp});
 }
 
@@ -107,7 +107,7 @@ class _$NoteDtoCopyWithImpl<$Res> implements $NoteDtoCopyWith<$Res> {
       todos: todos == freezed
           ? _value.todos
           : todos // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<TodoItemDto>,
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp // ignore: cast_nullable_to_non_nullable
@@ -125,7 +125,7 @@ abstract class _$NoteDtoCopyWith<$Res> implements $NoteDtoCopyWith<$Res> {
       {String id,
       String body,
       int color,
-      List<dynamic> todos,
+      List<TodoItemDto> todos,
       @ServerTimestampConverter() FieldValue? serverTimeStamp});
 }
 
@@ -162,7 +162,7 @@ class __$NoteDtoCopyWithImpl<$Res> extends _$NoteDtoCopyWithImpl<$Res>
       todos: todos == freezed
           ? _value.todos
           : todos // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<TodoItemDto>,
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp // ignore: cast_nullable_to_non_nullable
@@ -195,7 +195,7 @@ class _$_NoteDto extends _NoteDto {
   @override
   final int color;
   @override
-  final List<dynamic> todos;
+  final List<TodoItemDto> todos;
   @override
 
   ///used to sort todos by date. Will be provided by firestore?
@@ -246,7 +246,7 @@ abstract class _NoteDto extends NoteDto {
           {required String id,
           required String body,
           required int color,
-          required List<dynamic> todos,
+          required List<TodoItemDto> todos,
           @ServerTimestampConverter() required FieldValue? serverTimeStamp}) =
       _$_NoteDto;
   const _NoteDto._() : super._();
@@ -263,7 +263,7 @@ abstract class _NoteDto extends NoteDto {
   @override
   int get color;
   @override
-  List<dynamic> get todos;
+  List<TodoItemDto> get todos;
   @override
 
   ///used to sort todos by date. Will be provided by firestore?
