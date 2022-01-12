@@ -82,18 +82,30 @@ class NoteRepository implements INoteRepository {
   @override
   Stream<Either<NoteFailure, List<Note>>> watchAll() async* {
     final userDoc = await _firestore.userDocument();
+
+    var logger = Logger();
+    logger.d("snapshot ${userDoc.noteCollection
+        .snapshots()
+        .map(
+          (snapshot) =>
+          right<NoteFailure, List<Note>>(snapshot.docs
+              .map((doc) => NoteDto.fromFirestore(doc).toDomain()) as List<Note>
+          ),
+    )})");
+
+
     yield* userDoc.noteCollection
-        //todo .orderBy('serverTimeStamp', descending: true)
+    //todo .orderBy('serverTimeStamp', descending: true)
         .snapshots()
 
-        ///we can safely return only right side of Either
+    ///we can safely return only right side of Either
         .map(
-          (snapshot) => right<NoteFailure, List<Note>>(snapshot.docs
+          (snapshot) =>
+          right<NoteFailure, List<Note>>(snapshot.docs
               .map((doc) => NoteDto.fromFirestore(doc).toDomain())
               .toList()),
-        )
+    )
         .onErrorReturnWith((e, st) {
-
       if (e is FirebaseException && e.message!.contains('permission-denied')) {
         return left(const NoteFailure.insufficientPermission());
       } else {
@@ -108,23 +120,24 @@ class NoteRepository implements INoteRepository {
     yield* userDoc.noteCollection
         .orderBy('serverTimeStamp', descending: true)
         .snapshots()
-
-        ///map to Note
+    ///map to Note
         .map(
           (snapshot) =>
-              snapshot.docs.map((doc) => NoteDto.fromFirestore(doc).toDomain()),
-        )
+          snapshot.docs.map((doc) => NoteDto.fromFirestore(doc).toDomain()),
+    )
 
-        ///filter results
+    ///filter results
         .map(
-          (notes) => right<NoteFailure, List<Note>>(
+          (notes) =>
+          right<NoteFailure, List<Note>>(
             notes
-                .where((note) => note.maxListSize3
+                .where((note) =>
+                note.maxListSize3
                     .getOrCrash()
                     .any((todoItem) => !todoItem.done))
                 .toList(),
           ),
-        )
+    )
         .onErrorReturnWith((e, st) {
       if (e is FirebaseException && e.message!.contains('permission-denied')) {
         return left(const NoteFailure.insufficientPermission());

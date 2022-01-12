@@ -22,7 +22,7 @@ class _$NoteDtoTearOff {
   const _$NoteDtoTearOff();
 
   _NoteDto call(
-      {required String id,
+      {String? id,
       required String body,
       required int color,
       required List<TodoItemDto> todos,
@@ -48,7 +48,7 @@ const $NoteDto = _$NoteDtoTearOff();
 mixin _$NoteDto {
   ///id will not contain id of document, so it is marked as ignore
 //todo in orignial code this parameter is ommited by using json annotation
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
   int get color => throw _privateConstructorUsedError;
   List<TodoItemDto> get todos => throw _privateConstructorUsedError;
@@ -68,7 +68,7 @@ abstract class $NoteDtoCopyWith<$Res> {
   factory $NoteDtoCopyWith(NoteDto value, $Res Function(NoteDto) then) =
       _$NoteDtoCopyWithImpl<$Res>;
   $Res call(
-      {String id,
+      {String? id,
       String body,
       int color,
       List<TodoItemDto> todos,
@@ -95,7 +95,7 @@ class _$NoteDtoCopyWithImpl<$Res> implements $NoteDtoCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       body: body == freezed
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
@@ -122,7 +122,7 @@ abstract class _$NoteDtoCopyWith<$Res> implements $NoteDtoCopyWith<$Res> {
       __$NoteDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
+      {String? id,
       String body,
       int color,
       List<TodoItemDto> todos,
@@ -150,7 +150,7 @@ class __$NoteDtoCopyWithImpl<$Res> extends _$NoteDtoCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       body: body == freezed
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
@@ -175,7 +175,7 @@ class __$NoteDtoCopyWithImpl<$Res> extends _$NoteDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_NoteDto extends _NoteDto {
   const _$_NoteDto(
-      {required this.id,
+      {this.id,
       required this.body,
       required this.color,
       required this.todos,
@@ -189,7 +189,7 @@ class _$_NoteDto extends _NoteDto {
 
   ///id will not contain id of document, so it is marked as ignore
 //todo in orignial code this parameter is ommited by using json annotation
-  final String id;
+  final String? id;
   @override
   final String body;
   @override
@@ -243,7 +243,7 @@ class _$_NoteDto extends _NoteDto {
 
 abstract class _NoteDto extends NoteDto {
   const factory _NoteDto(
-          {required String id,
+          {String? id,
           required String body,
           required int color,
           required List<TodoItemDto> todos,
@@ -257,7 +257,7 @@ abstract class _NoteDto extends NoteDto {
 
   ///id will not contain id of document, so it is marked as ignore
 //todo in orignial code this parameter is ommited by using json annotation
-  String get id;
+  String? get id;
   @override
   String get body;
   @override

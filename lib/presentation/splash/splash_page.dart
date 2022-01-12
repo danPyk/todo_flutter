@@ -30,7 +30,7 @@ class SplashPage extends StatelessWidget {
       },
       child:  Scaffold(
         body: Center(
-          child:  Container(height: 100.0, width: 100.0, color: Colors.red,),
+          child:  Container(height: 100.0, width: 100.0, color: Colors.yellow,),
         ),
       ),
     );

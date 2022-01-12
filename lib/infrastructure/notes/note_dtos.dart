@@ -21,7 +21,7 @@ class NoteDto with _$NoteDto {
   const factory NoteDto({
     ///id will not contain id of document, so it is marked as ignore
     //todo in orignial code this parameter is ommited by using json annotation
-    required String id,
+     String? id,
     required String body,
     required int color,
     required List<TodoItemDto> todos,
@@ -36,7 +36,6 @@ class NoteDto with _$NoteDto {
       id: note.id.getOrCrash(),
       body: note.noteBody.getOrCrash(),
       color: note.noteColor.getOrCrash().value,
-
       ///converts todos into TodoItemDto
       todos: note.maxListSize3
           .getOrCrash()
@@ -51,7 +50,7 @@ class NoteDto with _$NoteDto {
 
   Note toDomain() {
     return Note(
-      id: UniqueId.fromString(id),
+      id: UniqueId.fromString(id!),
       noteBody: NoteBody(body),
       noteColor: NoteColor(Color(color)),
       //todo might
@@ -62,18 +61,25 @@ class NoteDto with _$NoteDto {
   factory NoteDto.fromJson(Map<String, dynamic> json) =>
       _$NoteDtoFromJson(json);
 
-  // factory NoteDto.fromFirestore(DocumentSnapshot doc) {
-  //   ///copyWith is for populate ID
-  //   return NoteDto.fromJson(doc.data() as  )
-  //       .copyWith(id: doc.id);
-  // }
-
-  //todo not finished
-  static Map<String, dynamic> convertObjectToJson(Object? object) => {
-        'name': object,
-        'age': object,
-      };
+//todo might
+  factory NoteDto.fromFirestore(DocumentSnapshot doc) {
+    ///copyWith is for populate ID
+    return NoteDto.fromJson(doc.data() as Map<String, dynamic>  ).copyWith(id: doc.id);
+  }
 }
+///convert DataTIme to ServerTimestamp
+class ServerTimestampConverter implements JsonConverter<FieldValue?, Object> {
+  const ServerTimestampConverter();
+
+  @override
+  FieldValue fromJson(Object json) {
+    return FieldValue.serverTimestamp();
+  }
+
+  @override
+  Object toJson(FieldValue? fieldValue) => fieldValue!;
+}
+
 
 @freezed
 class TodoItemDto with _$TodoItemDto {
@@ -97,7 +103,7 @@ class TodoItemDto with _$TodoItemDto {
 
   TodoItem toDomain() {
     return TodoItem(
-      id: UniqueId.fromString(this.id),
+      id: UniqueId.fromUniqueString(id),
       todoName: TodoName(name),
       done: done,
     );
@@ -107,15 +113,3 @@ class TodoItemDto with _$TodoItemDto {
       _$TodoItemDtoFromJson(json);
 }
 
-///convert DataTIme to ServerTimestamp
-class ServerTimestampConverter implements JsonConverter<FieldValue?, Object> {
-  const ServerTimestampConverter();
-
-  @override
-  FieldValue fromJson(Object json) {
-    return FieldValue.serverTimestamp();
-  }
-
-  @override
-  Object toJson(FieldValue? fieldValue) => fieldValue!;
-}

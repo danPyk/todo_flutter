@@ -20,8 +20,6 @@ class TodoItem with _$TodoItem {
     required bool  done,
    }) = _TodoItem;
 
-//todo might, but rather not
-
   factory TodoItem.empty() =>
       TodoItem(
           id: UniqueId(),

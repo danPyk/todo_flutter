@@ -7,7 +7,7 @@ part of 'note_dtos.dart';
 // **************************************************************************
 
 _$_NoteDto _$$_NoteDtoFromJson(Map<String, dynamic> json) => _$_NoteDto(
-      id: json['id'] as String,
+      id: json['id'] as String?,
       body: json['body'] as String,
       color: json['color'] as int,
       todos: (json['todos'] as List<dynamic>)
