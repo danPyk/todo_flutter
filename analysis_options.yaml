@@ -559,7 +559,7 @@ linter:
     # Follow dart style naming conventions
     #
     # https://dart-lang.github.io/linter/lints/non_constant_identifier_names.html
-    - non_constant_identifier_names
+    #- non_constant_identifier_names
 
     # Don't call unnecessary conversion methods on primitives
     #
@@ -1039,7 +1039,7 @@ linter:
     #
     # Linter v1.15
     # https://dart-lang.github.io/linter/lints/use_decorated_box.html
-    - use_decorated_box
+   # - use_decorated_box
 
     # Always use hex syntax Color(0x00000001), never Color(1)
     #

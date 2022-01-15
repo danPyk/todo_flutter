@@ -27,7 +27,6 @@ class NoteWatcherBloc extends Bloc<NoteWatcherEvent, NoteWatcherState> {
   NoteWatcherBloc(this.iNoteRepository)
       : super(const NoteWatcherState.initial()) {
     on<NoteWatcherEvent>((event, emit) {
-      // var logger = Logger(); logger.d(event);
 
       event.map(watchAllStarted: (e) async {
         emit(const NoteWatcherState.loadInProgress());

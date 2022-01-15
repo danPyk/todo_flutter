@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 import 'package:todo_flutter/application/notes/note_watcher/note_watcher_bloc.dart';
 
 import 'critical_failure_display_widget.dart';
