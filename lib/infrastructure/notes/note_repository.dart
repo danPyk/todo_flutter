@@ -83,14 +83,16 @@ class NoteRepository implements INoteRepository {
     final userDoc = await _firestore.userDocument();
 
     yield* userDoc.noteCollection
-        .orderBy('serverTimeStamp', descending: true)
+        // .orderBy('serverTimeStamp', descending: true)
         .snapshots()
 
         ///we can safely return only right side of Either
         .map(
-          (snapshot) => right<NoteFailure, List<Note>>(snapshot.docs
-              .map((doc) => NoteDto.fromFirestore(doc).toDomain())
-              .toList()),
+          (snapshot) => right<NoteFailure, List<Note>>(
+            snapshot.docs
+                .map((doc) => NoteDto.fromFirestore(doc).toDomain())
+                .toList(),
+          ),
         )
         .onErrorReturnWith((e, st) {
       if (e is FirebaseException && e.message!.contains('permission-denied')) {

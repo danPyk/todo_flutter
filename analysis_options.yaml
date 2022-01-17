@@ -1125,4 +1125,4 @@ linter:
 
     # Don't assign anything to void
     # https://dart-lang.github.io/linter/lints/void_checks.html
-    - void_checks
+    #- void_checks
