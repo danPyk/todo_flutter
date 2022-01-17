@@ -52,9 +52,7 @@ class NoteWatcherBloc extends Bloc<NoteWatcherEvent, NoteWatcherState> {
         emit(e.failureOrNotes.fold((l) => NoteWatcherState.loadFailure(l),
             (r) => NoteWatcherState.loadSuccess(r)));
 
-        var logger = Logger();
-        logger.d(e.failureOrNotes.fold((l) => NoteWatcherState.loadFailure(l),
-            (r) => NoteWatcherState.loadSuccess(r..isEmpty)));
+
       });
     });
   }

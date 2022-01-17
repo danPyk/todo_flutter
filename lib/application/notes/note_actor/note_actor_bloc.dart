@@ -15,9 +15,9 @@ part 'note_actor_state.dart';
 ///used for deleting notes
 @injectable
 class NoteActorBloc extends Bloc<NoteActorEvent, NoteActorState> {
-  late INoteRepository _iNoteRepository;
+  final INoteRepository _iNoteRepository;
 
-  NoteActorBloc() : super(const NoteActorState.initial()) {
+  NoteActorBloc(this._iNoteRepository) : super(const NoteActorState.initial()) {
     on<NoteActorEvent>((event, emit) async {
       emit(const NoteActorState.actionInProgress());
       final possibleFailure = await _iNoteRepository.delete(event.note);

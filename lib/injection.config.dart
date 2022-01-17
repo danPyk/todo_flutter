@@ -38,7 +38,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       _i7.FirebaseAuthFacade(get<_i3.FirebaseAuth>(), get<_i5.GoogleSignIn>()));
   gh.lazySingleton<_i8.INoteRepository>(
       () => _i9.NoteRepository(get<_i4.FirebaseFirestore>()));
-  gh.factory<_i10.NoteActorBloc>(() => _i10.NoteActorBloc());
+  gh.factory<_i10.NoteActorBloc>(
+      () => _i10.NoteActorBloc(get<_i8.INoteRepository>()));
   gh.factory<_i11.NoteFormBloc>(
       () => _i11.NoteFormBloc(get<_i8.INoteRepository>()));
   gh.factory<_i12.NoteWatcherBloc>(

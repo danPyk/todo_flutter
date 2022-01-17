@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/src/provider.dart';
 import 'package:todo_flutter/application/notes/note_actor/note_actor_bloc.dart';
 import 'package:todo_flutter/domain/notes/note.dart';
 import 'package:todo_flutter/domain/notes/todo_item.dart';
-
 
 class NoteCard extends StatelessWidget {
   final Note note;
@@ -19,12 +18,12 @@ class NoteCard extends StatelessWidget {
       color: note.noteColor.getOrCrash(),
       child: InkWell(
         onTap: () {
-          //todo
-       //   ExtendedNavigator.of(context).pushNoteFormPage(editedNote: note);
+          //Navigator.pushReplacementNamed(context, NoteFormPage);
         },
         onLongPress: () {
-          // final noteActorBloc = context.watch()<NoteActorBloc>();
-          // _showDeletionDialog(context, noteActorBloc);
+
+          final noteActorBloc = context.read<NoteActorBloc>();
+          _showDeletionDialog(context, noteActorBloc);
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -40,9 +39,7 @@ class NoteCard extends StatelessWidget {
                 Wrap(
                   spacing: 8,
                   children: <Widget>[
-                    ...note.maxListSize3
-                        .getOrCrash()
-                        .map(
+                    ...note.maxListSize3.getOrCrash().map(
                           (todo) => TodoDisplay(todo: todo),
                         )
                     //todo might - deleted .interator
@@ -100,9 +97,9 @@ class TodoDisplay extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         if (todo.done)
-          Icon(
+          const Icon(
             Icons.check_box,
-            color: Theme.of(context).cardColor,
+            color: Colors.black,
           ),
         if (!todo.done)
           Icon(

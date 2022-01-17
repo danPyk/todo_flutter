@@ -15,7 +15,7 @@ extension FirestoreX on FirebaseFirestore {
         .doc(user.id.getOrCrash());
   }
 }
-///extension used to not pass everywhere raw string
+///to not pass everywhere raw string:
 
 extension DocumentReferenceX on DocumentReference {
   CollectionReference get noteCollection => collection('notes');
