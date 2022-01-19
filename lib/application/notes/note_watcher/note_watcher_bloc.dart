@@ -4,11 +4,11 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import "package:freezed_annotation/freezed_annotation.dart";
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 import 'package:todo_flutter/domain/notes/i_note_repository.dart';
 import 'package:todo_flutter/domain/notes/note.dart';
 import 'package:todo_flutter/domain/notes/note_failure.dart';
+import 'package:kt_dart/collection.dart';
 
 part 'note_watcher_bloc.freezed.dart';
 
@@ -23,7 +23,7 @@ class NoteWatcherBloc extends Bloc<NoteWatcherEvent, NoteWatcherState> {
   final INoteRepository iNoteRepository;
 
   ///used to switch between watchAll and watchUncompleted
-  StreamSubscription<Either<NoteFailure, List<Note>>>? _streamSubscription;
+  StreamSubscription<Either<NoteFailure, KtList<Note>>>? _streamSubscription;
 
   NoteWatcherBloc(this.iNoteRepository)
       : super(const NoteWatcherState.initial()) {
@@ -34,25 +34,22 @@ class NoteWatcherBloc extends Bloc<NoteWatcherEvent, NoteWatcherState> {
 
         ///we need to emit state after gathering evey element of list
         _streamSubscription = iNoteRepository.watchAll().listen(
-            (failureOrNotes) =>
-                add(NoteWatcherEvent.notesReceived(failureOrNotes)));
-        var logger = Logger();
-        logger.d(_streamSubscription = iNoteRepository.watchAll().listen(
-            (failureOrNotes) =>
-                add(NoteWatcherEvent.notesReceived(failureOrNotes))));
-      },
-          watchUncompletedStarted: (e) async {
+              (failureOrNotes) =>
+                  add(NoteWatcherEvent.notesReceived(failureOrNotes)),
+            );
+      }, watchUncompletedStarted: (e) async {
         emit(const NoteWatcherState.loadInProgress());
         await _streamSubscription?.cancel();
         _streamSubscription = iNoteRepository.watchUncompleted().listen(
-            (failureOrNotes) =>
-                add(NoteWatcherEvent.notesReceived(failureOrNotes)));
-      },
-          notesReceived: (e) {
-        emit(e.failureOrNotes.fold((l) => NoteWatcherState.loadFailure(l),
-            (r) => NoteWatcherState.loadSuccess(r)));
-
-
+              (failureOrNotes) => add(
+                NoteWatcherEvent.notesReceived(failureOrNotes),
+              ),
+            );
+      }, notesReceived: (e) {
+        emit(
+          e.failureOrNotes.fold((l) => NoteWatcherState.loadFailure(l),
+              (r) => NoteWatcherState.loadSuccess(r)),
+        );
       });
     });
   }

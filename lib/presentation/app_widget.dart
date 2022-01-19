@@ -5,6 +5,7 @@ import 'package:todo_flutter/presentation/sign_in/sign_in_page.dart';
 import 'package:todo_flutter/presentation/splash/splash_page.dart';
 
 import '../injection.dart';
+import 'notes/note_form/note_form_page.dart';
 import 'notes/note_overview/notes_overview_page.dart';
 
 class AppWidget extends StatelessWidget {
@@ -23,7 +24,8 @@ class AppWidget extends StatelessWidget {
         routes: {
           SignInPage.id: (context) => SignInPage(),
           SplashPage.id: (context) => SplashPage(),
-          NotesOverviewPage.id: (context) => NotesOverviewPage(),
+          NotesOverviewPage.id: (context) =>  NotesOverviewPage(),
+          NoteFormPage.id: (context) =>     NoteFormPage(),
         },
       ),
     );

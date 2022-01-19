@@ -4,13 +4,18 @@ import 'package:provider/provider.dart';
 import 'package:todo_flutter/application/auth/auth_bloc.dart';
 import 'package:todo_flutter/application/notes/note_actor/note_actor_bloc.dart';
 import 'package:todo_flutter/application/notes/note_watcher/note_watcher_bloc.dart';
+import 'package:todo_flutter/domain/notes/note.dart';
 import 'package:todo_flutter/injection.dart';
+import 'package:todo_flutter/presentation/notes/note_form/note_form_page.dart';
 import 'package:todo_flutter/presentation/notes/note_overview/widgets/notes_overview_body_widget.dart';
-import 'package:todo_flutter/presentation/sign_in/sign_in_page.dart';
+import 'package:todo_flutter/presentation/notes/note_overview/widgets/uncompleted_switch.dart';
 import 'package:todo_flutter/presentation/widgets/global_snackbar.dart';
 
 class NotesOverviewPage extends StatelessWidget {
   static String id = "notes_overview";
+  final Note? note;
+
+  const NotesOverviewPage({Key? key,  this.note}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +35,15 @@ class NotesOverviewPage extends StatelessWidget {
             listener: (context, state) {
               ///maybeMap allows ignore authenticated, we are only care about unauthenticated
               state.maybeMap(
-                unauthenticated: (_) =>
-                    Navigator.pushReplacementNamed(context, SignInPage.id),
+                unauthenticated: (_) => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NoteFormPage(editedNote: note))),
                 orElse: () {},
               );
             },
           ),
+
           ///used to show snacbar
           BlocListener<NoteActorBloc, NoteActorState>(
             listener: (context, state) {
@@ -64,15 +72,19 @@ class NotesOverviewPage extends StatelessWidget {
             leading: IconButton(
               icon: const Icon(Icons.exit_to_app),
               onPressed: () {
-                Provider.of<AuthBloc>(context, listen: false).add(const AuthEvent.signedOut());
+                Provider.of<AuthBloc>(context, listen: false)
+                    .add(const AuthEvent.signedOut());
               },
             ),
+            actions: <Widget>[
+              UncompletedSwitch(),
+            ],
           ),
-           body: NotesOverviewBody(),
+          body: NotesOverviewBody(),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               //todo
-              //  ExtendedNavigator.of(context).pushNoteFormPage(editedNote: null);
+              Navigator.pushNamed(context, NoteFormPage.id);
             },
             child: const Icon(Icons.add),
           ),

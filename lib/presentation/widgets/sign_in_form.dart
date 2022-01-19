@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_flutter/application/auth/auth_bloc.dart';
 import 'package:todo_flutter/application/auth/signInForm/sign_in_form_bloc.dart';
 import 'package:todo_flutter/presentation/notes/note_overview/notes_overview_page.dart';
@@ -99,7 +100,8 @@ class SignInForm extends StatelessWidget {
                   Expanded(
                     child: MaterialButton(
                       onPressed: () {
-                        context.watch<SignInFormBloc>().add(
+                        //if theres no corresponding user theres an infnity circullar
+                        context.read<SignInFormBloc>().add(
                               const SignInFormEvent
                                   .signInWithEmailAndPasswordPressed(),
                             );
@@ -110,9 +112,11 @@ class SignInForm extends StatelessWidget {
                   Expanded(
                     child: MaterialButton(
                       onPressed: () {
-                        context.watch<SignInFormBloc>().add(
-                              const SignInFormEvent
-                                  .registerWithEmailAndPasswordPressed(),
+                        //todo if email is already in base theres an infinity circular progress
+                        Provider.of<SignInFormBloc>(context, listen: false).add(
+                            const SignInFormEvent
+                                .registerWithEmailAndPasswordPressed(),
+
                             );
                       },
                       child: const Text('REGISTER'),

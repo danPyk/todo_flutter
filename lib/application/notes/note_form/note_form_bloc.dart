@@ -10,6 +10,7 @@ import 'package:todo_flutter/domain/notes/note.dart';
 import 'package:todo_flutter/domain/notes/note_failure.dart';
 import 'package:todo_flutter/domain/notes/value_objects.dart';
 import 'package:todo_flutter/presentation/notes/note_form/misc/todo_item_presentation_classes.dart';
+import 'package:kt_dart/collection.dart';
 
 part 'note_form_bloc.freezed.dart';
 
@@ -32,11 +33,11 @@ class NoteFormBloc extends Bloc<NoteFormEvent, NoteFormState> {
       }, bodyChanged: (e) {
         emit(state.copyWith(
             note: state.note.copyWith(noteBody: NoteBody(e.bodyString)),
-            saveFailureOrSuccessOption: none()));
+            saveFailureOrSuccessOption: none()),);
       }, colorChanged: (e) {
         emit(state.copyWith(
             note: state.note.copyWith(noteColor: NoteColor(e.color)),
-            saveFailureOrSuccessOption: none()));
+            saveFailureOrSuccessOption: none()),);
       }, todosChanged: (e) {
         emit(state.copyWith(
           //todo might

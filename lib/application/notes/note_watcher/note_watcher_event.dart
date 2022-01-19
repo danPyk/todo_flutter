@@ -7,7 +7,7 @@ part of 'note_watcher_bloc.dart';
   _WatchUncompletedStarted;
   ///this helpful state is only used inside bloc to add possibility to selecting all or completed notes
   const factory NoteWatcherEvent.notesReceived(
-      Either<NoteFailure, List<Note>> failureOrNotes,
+      Either<NoteFailure, KtList<Note>> failureOrNotes,
       ) = _NotesReceived;
 
 

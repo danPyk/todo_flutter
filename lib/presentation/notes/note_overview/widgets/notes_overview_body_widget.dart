@@ -27,7 +27,7 @@ class NotesOverviewBody extends StatelessWidget {
                   return NoteCard(note: note);
                 }
               },
-              itemCount: state.notes.length,
+              itemCount: state.notes.size,
             );
           },
           loadFailure: (state) {

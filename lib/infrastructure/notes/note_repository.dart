@@ -7,11 +7,12 @@ import 'package:todo_flutter/domain/notes/note.dart';
 import 'package:todo_flutter/domain/notes/note_failure.dart';
 import 'package:todo_flutter/infrastructure/core/firestore_helpers.dart';
 import 'package:todo_flutter/infrastructure/notes/note_dtos.dart';
+import 'package:kt_dart/kt.dart';
 
 ///firebase structure
 ///users/{user ID}/notes/{note ID (todos as array ToDoo objects]
 
-///register as INoteRepository type allows us to whenever request INoteReposiotory using injectable then retrieve NoteReposiotory
+///register as INoteRepository type allows to whenever request INoteReposiotory using injectable then retrieve NoteReposiotory
 @LazySingleton(as: INoteRepository)
 class NoteRepository implements INoteRepository {
   late final FirebaseFirestore _firestore;
@@ -79,55 +80,47 @@ class NoteRepository implements INoteRepository {
 
 //todo might
   @override
-  Stream<Either<NoteFailure, List<Note>>> watchAll() async* {
+  Stream<Either<NoteFailure, KtList<Note>>> watchAll() async* {
     final userDoc = await _firestore.userDocument();
-
     yield* userDoc.noteCollection
-        // .orderBy('serverTimeStamp', descending: true)
+        .orderBy('serverTimeStamp', descending: true)
         .snapshots()
-
-        ///we can safely return only right side of Either
         .map(
-          (snapshot) => right<NoteFailure, List<Note>>(
-            snapshot.docs
-                .map((doc) => NoteDto.fromFirestore(doc).toDomain())
-                .toList(),
-          ),
-        )
+          (snapshot) => right<NoteFailure, KtList<Note>>(
+        snapshot.docs
+            .map((doc) => NoteDto.fromFirestore(doc).toDomain())
+            .toImmutableList(),
+      ),
+    )
         .onErrorReturnWith((e, st) {
-      if (e is FirebaseException && e.message!.contains('permission-denied')) {
+      if (e is FirebaseException && e.message!.contains('PERMISSION_DENIED')) {
         return left(const NoteFailure.insufficientPermission());
       } else {
         return left(const NoteFailure.unexpected());
       }
     });
   }
-
   @override
-  Stream<Either<NoteFailure, List<Note>>> watchUncompleted() async* {
+  Stream<Either<NoteFailure, KtList<Note>>> watchUncompleted() async* {
     final userDoc = await _firestore.userDocument();
     yield* userDoc.noteCollection
-        .orderBy('serverTimeStamp', descending: true)
+        //.orderBy('serverTimeStamp', descending: true)
         .snapshots()
-
-        ///map to Note
+    ///map to note
         .map(
           (snapshot) =>
-              snapshot.docs.map((doc) => NoteDto.fromFirestore(doc).toDomain()),
-        )
-
-        ///filter results
+          snapshot.docs.map((doc) => NoteDto.fromFirestore(doc).toDomain()),
+    )///filter results
         .map(
-          (notes) => right<NoteFailure, List<Note>>(
-            notes
-                .where((note) => note.maxListSize3
-                    .getOrCrash()
-                    .any((todoItem) => !todoItem.done))
-                .toList(),
-          ),
-        )
+          (notes) => right<NoteFailure, KtList<Note>>(
+        notes
+            .where((note) =>
+            note.maxListSize3.getOrCrash().any((todoItem) => !todoItem.done))
+            .toImmutableList(),
+      ),
+    )
         .onErrorReturnWith((e, st) {
-      if (e is FirebaseException && e.message!.contains('permission-denied')) {
+      if (e is FirebaseException && e.message!.contains('PERMISSION_DENIED')) {
         return left(const NoteFailure.insufficientPermission());
       } else {
         // log.error(e.toString());

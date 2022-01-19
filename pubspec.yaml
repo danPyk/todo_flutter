@@ -52,6 +52,7 @@ dependencies:
   json_annotation: ^4.4.0
 
   rxdart: ^0.27.3
+  kt_dart: ^0.10.0
 
 
 

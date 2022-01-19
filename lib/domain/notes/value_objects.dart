@@ -4,6 +4,9 @@ import 'package:todo_flutter/core/failures.dart';
 import 'package:todo_flutter/core/value_objects.dart';
 import 'package:todo_flutter/core/value_transfromers.dart';
 import 'package:todo_flutter/core/value_validators.dart';
+import 'package:todo_flutter/domain/notes/todo_item.dart';
+import 'package:kt_dart/kt.dart';
+
 
 class NoteBody extends ValueObject<String> {
   @override
@@ -58,30 +61,25 @@ class NoteColor extends ValueObject<Color> {
   const NoteColor._(this.value);
 }
 
-class ListMaxSize3<T> extends ValueObject<List<T>> {
+class ListMaxSize3<T> extends ValueObject<KtList<T>> {
+  @override
+  final Either<ValueFailure<KtList<T>>, KtList<T>> value;
+
   static const maxLength = 3;
 
-  @override
-  final Either<ValueFailure<List<T>>, List<T>> value;
-
-  int get length {
-    //check if
-    if (value.isRight()) {
-      return value.length();
-    } else {
-      return 0;
-    }
-  }
-
-  bool get isFull {
-    return length == maxLength;
-  }
-
-  factory ListMaxSize3(List<T> input) {
+  factory ListMaxSize3(KtList<T> input) {
     return ListMaxSize3._(
       validateMaxListLength(input, maxLength),
     );
   }
 
   const ListMaxSize3._(this.value);
+
+  int get length {
+    return value.getOrElse(() => emptyList()).size;
+  }
+
+  bool get isFull {
+    return length == maxLength;
+  }
 }

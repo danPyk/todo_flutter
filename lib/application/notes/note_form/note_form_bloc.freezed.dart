@@ -35,7 +35,7 @@ class _$NoteFormEventTearOff {
     );
   }
 
-  _TodosChanged todosChanged(List<TodoItemPrimitive> todosPrimitive) {
+  _TodosChanged todosChanged(KtList<TodoItemPrimitive> todosPrimitive) {
     return _TodosChanged(
       todosPrimitive,
     );
@@ -56,7 +56,7 @@ mixin _$NoteFormEvent {
     required TResult Function(Option<Note> initialNoteOption) initialized,
     required TResult Function(String bodyString) bodyChanged,
     required TResult Function(Color color) colorChanged,
-    required TResult Function(List<TodoItemPrimitive> todosPrimitive)
+    required TResult Function(KtList<TodoItemPrimitive> todosPrimitive)
         todosChanged,
     required TResult Function() saved,
   }) =>
@@ -66,7 +66,7 @@ mixin _$NoteFormEvent {
     TResult Function(Option<Note> initialNoteOption)? initialized,
     TResult Function(String bodyString)? bodyChanged,
     TResult Function(Color color)? colorChanged,
-    TResult Function(List<TodoItemPrimitive> todosPrimitive)? todosChanged,
+    TResult Function(KtList<TodoItemPrimitive> todosPrimitive)? todosChanged,
     TResult Function()? saved,
   }) =>
       throw _privateConstructorUsedError;
@@ -75,7 +75,7 @@ mixin _$NoteFormEvent {
     TResult Function(Option<Note> initialNoteOption)? initialized,
     TResult Function(String bodyString)? bodyChanged,
     TResult Function(Color color)? colorChanged,
-    TResult Function(List<TodoItemPrimitive> todosPrimitive)? todosChanged,
+    TResult Function(KtList<TodoItemPrimitive> todosPrimitive)? todosChanged,
     TResult Function()? saved,
     required TResult orElse(),
   }) =>
@@ -195,7 +195,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(Option<Note> initialNoteOption) initialized,
     required TResult Function(String bodyString) bodyChanged,
     required TResult Function(Color color) colorChanged,
-    required TResult Function(List<TodoItemPrimitive> todosPrimitive)
+    required TResult Function(KtList<TodoItemPrimitive> todosPrimitive)
         todosChanged,
     required TResult Function() saved,
   }) {
@@ -208,7 +208,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(Option<Note> initialNoteOption)? initialized,
     TResult Function(String bodyString)? bodyChanged,
     TResult Function(Color color)? colorChanged,
-    TResult Function(List<TodoItemPrimitive> todosPrimitive)? todosChanged,
+    TResult Function(KtList<TodoItemPrimitive> todosPrimitive)? todosChanged,
     TResult Function()? saved,
   }) {
     return initialized?.call(initialNoteOption);
@@ -220,7 +220,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(Option<Note> initialNoteOption)? initialized,
     TResult Function(String bodyString)? bodyChanged,
     TResult Function(Color color)? colorChanged,
-    TResult Function(List<TodoItemPrimitive> todosPrimitive)? todosChanged,
+    TResult Function(KtList<TodoItemPrimitive> todosPrimitive)? todosChanged,
     TResult Function()? saved,
     required TResult orElse(),
   }) {
@@ -348,7 +348,7 @@ class _$_BodyChanged implements _BodyChanged {
     required TResult Function(Option<Note> initialNoteOption) initialized,
     required TResult Function(String bodyString) bodyChanged,
     required TResult Function(Color color) colorChanged,
-    required TResult Function(List<TodoItemPrimitive> todosPrimitive)
+    required TResult Function(KtList<TodoItemPrimitive> todosPrimitive)
         todosChanged,
     required TResult Function() saved,
   }) {
@@ -361,7 +361,7 @@ class _$_BodyChanged implements _BodyChanged {
     TResult Function(Option<Note> initialNoteOption)? initialized,
     TResult Function(String bodyString)? bodyChanged,
     TResult Function(Color color)? colorChanged,
-    TResult Function(List<TodoItemPrimitive> todosPrimitive)? todosChanged,
+    TResult Function(KtList<TodoItemPrimitive> todosPrimitive)? todosChanged,
     TResult Function()? saved,
   }) {
     return bodyChanged?.call(bodyString);
@@ -373,7 +373,7 @@ class _$_BodyChanged implements _BodyChanged {
     TResult Function(Option<Note> initialNoteOption)? initialized,
     TResult Function(String bodyString)? bodyChanged,
     TResult Function(Color color)? colorChanged,
-    TResult Function(List<TodoItemPrimitive> todosPrimitive)? todosChanged,
+    TResult Function(KtList<TodoItemPrimitive> todosPrimitive)? todosChanged,
     TResult Function()? saved,
     required TResult orElse(),
   }) {
@@ -501,7 +501,7 @@ class _$_ColorChanged implements _ColorChanged {
     required TResult Function(Option<Note> initialNoteOption) initialized,
     required TResult Function(String bodyString) bodyChanged,
     required TResult Function(Color color) colorChanged,
-    required TResult Function(List<TodoItemPrimitive> todosPrimitive)
+    required TResult Function(KtList<TodoItemPrimitive> todosPrimitive)
         todosChanged,
     required TResult Function() saved,
   }) {
@@ -514,7 +514,7 @@ class _$_ColorChanged implements _ColorChanged {
     TResult Function(Option<Note> initialNoteOption)? initialized,
     TResult Function(String bodyString)? bodyChanged,
     TResult Function(Color color)? colorChanged,
-    TResult Function(List<TodoItemPrimitive> todosPrimitive)? todosChanged,
+    TResult Function(KtList<TodoItemPrimitive> todosPrimitive)? todosChanged,
     TResult Function()? saved,
   }) {
     return colorChanged?.call(color);
@@ -526,7 +526,7 @@ class _$_ColorChanged implements _ColorChanged {
     TResult Function(Option<Note> initialNoteOption)? initialized,
     TResult Function(String bodyString)? bodyChanged,
     TResult Function(Color color)? colorChanged,
-    TResult Function(List<TodoItemPrimitive> todosPrimitive)? todosChanged,
+    TResult Function(KtList<TodoItemPrimitive> todosPrimitive)? todosChanged,
     TResult Function()? saved,
     required TResult orElse(),
   }) {
@@ -591,7 +591,7 @@ abstract class _$TodosChangedCopyWith<$Res> {
   factory _$TodosChangedCopyWith(
           _TodosChanged value, $Res Function(_TodosChanged) then) =
       __$TodosChangedCopyWithImpl<$Res>;
-  $Res call({List<TodoItemPrimitive> todosPrimitive});
+  $Res call({KtList<TodoItemPrimitive> todosPrimitive});
 }
 
 /// @nodoc
@@ -613,7 +613,7 @@ class __$TodosChangedCopyWithImpl<$Res>
       todosPrimitive == freezed
           ? _value.todosPrimitive
           : todosPrimitive // ignore: cast_nullable_to_non_nullable
-              as List<TodoItemPrimitive>,
+              as KtList<TodoItemPrimitive>,
     ));
   }
 }
@@ -624,7 +624,7 @@ class _$_TodosChanged implements _TodosChanged {
   const _$_TodosChanged(this.todosPrimitive);
 
   @override
-  final List<TodoItemPrimitive> todosPrimitive;
+  final KtList<TodoItemPrimitive> todosPrimitive;
 
   @override
   String toString() {
@@ -655,7 +655,7 @@ class _$_TodosChanged implements _TodosChanged {
     required TResult Function(Option<Note> initialNoteOption) initialized,
     required TResult Function(String bodyString) bodyChanged,
     required TResult Function(Color color) colorChanged,
-    required TResult Function(List<TodoItemPrimitive> todosPrimitive)
+    required TResult Function(KtList<TodoItemPrimitive> todosPrimitive)
         todosChanged,
     required TResult Function() saved,
   }) {
@@ -668,7 +668,7 @@ class _$_TodosChanged implements _TodosChanged {
     TResult Function(Option<Note> initialNoteOption)? initialized,
     TResult Function(String bodyString)? bodyChanged,
     TResult Function(Color color)? colorChanged,
-    TResult Function(List<TodoItemPrimitive> todosPrimitive)? todosChanged,
+    TResult Function(KtList<TodoItemPrimitive> todosPrimitive)? todosChanged,
     TResult Function()? saved,
   }) {
     return todosChanged?.call(todosPrimitive);
@@ -680,7 +680,7 @@ class _$_TodosChanged implements _TodosChanged {
     TResult Function(Option<Note> initialNoteOption)? initialized,
     TResult Function(String bodyString)? bodyChanged,
     TResult Function(Color color)? colorChanged,
-    TResult Function(List<TodoItemPrimitive> todosPrimitive)? todosChanged,
+    TResult Function(KtList<TodoItemPrimitive> todosPrimitive)? todosChanged,
     TResult Function()? saved,
     required TResult orElse(),
   }) {
@@ -732,10 +732,10 @@ class _$_TodosChanged implements _TodosChanged {
 }
 
 abstract class _TodosChanged implements NoteFormEvent {
-  const factory _TodosChanged(List<TodoItemPrimitive> todosPrimitive) =
+  const factory _TodosChanged(KtList<TodoItemPrimitive> todosPrimitive) =
       _$_TodosChanged;
 
-  List<TodoItemPrimitive> get todosPrimitive;
+  KtList<TodoItemPrimitive> get todosPrimitive;
   @JsonKey(ignore: true)
   _$TodosChangedCopyWith<_TodosChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -782,7 +782,7 @@ class _$_Saved implements _Saved {
     required TResult Function(Option<Note> initialNoteOption) initialized,
     required TResult Function(String bodyString) bodyChanged,
     required TResult Function(Color color) colorChanged,
-    required TResult Function(List<TodoItemPrimitive> todosPrimitive)
+    required TResult Function(KtList<TodoItemPrimitive> todosPrimitive)
         todosChanged,
     required TResult Function() saved,
   }) {
@@ -795,7 +795,7 @@ class _$_Saved implements _Saved {
     TResult Function(Option<Note> initialNoteOption)? initialized,
     TResult Function(String bodyString)? bodyChanged,
     TResult Function(Color color)? colorChanged,
-    TResult Function(List<TodoItemPrimitive> todosPrimitive)? todosChanged,
+    TResult Function(KtList<TodoItemPrimitive> todosPrimitive)? todosChanged,
     TResult Function()? saved,
   }) {
     return saved?.call();
@@ -807,7 +807,7 @@ class _$_Saved implements _Saved {
     TResult Function(Option<Note> initialNoteOption)? initialized,
     TResult Function(String bodyString)? bodyChanged,
     TResult Function(Color color)? colorChanged,
-    TResult Function(List<TodoItemPrimitive> todosPrimitive)? todosChanged,
+    TResult Function(KtList<TodoItemPrimitive> todosPrimitive)? todosChanged,
     TResult Function()? saved,
     required TResult orElse(),
   }) {

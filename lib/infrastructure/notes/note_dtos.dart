@@ -5,6 +5,7 @@ import 'package:todo_flutter/core/value_objects.dart';
 import 'package:todo_flutter/domain/notes/note.dart';
 import 'package:todo_flutter/domain/notes/todo_item.dart';
 import 'package:todo_flutter/domain/notes/value_objects.dart';
+import 'package:kt_dart/kt.dart';
 
 part 'note_dtos.freezed.dart';
 
@@ -36,14 +37,12 @@ class NoteDto with _$NoteDto {
       id: note.id.getOrCrash(),
       body: note.noteBody.getOrCrash(),
       color: note.noteColor.getOrCrash().value,
-      ///converts todos into TodoItemDto
       todos: note.maxListSize3
           .getOrCrash()
           .map(
             (todoItem) => TodoItemDto.fromDomain(todoItem),
-          )
-          //todo might
-          .toList(),
+      )
+          .asList(),
       serverTimeStamp: FieldValue.serverTimestamp(),
     );
   }
@@ -54,7 +53,7 @@ class NoteDto with _$NoteDto {
       noteBody: NoteBody(body),
       noteColor: NoteColor(Color(color)),
       //todo might
-      maxListSize3: ListMaxSize3(todos.map((dto) => dto.toDomain()).toList()),
+      maxListSize3: ListMaxSize3(todos.map((dto) => dto.toDomain()).toImmutableList()),
     );
   }
 
@@ -64,7 +63,7 @@ class NoteDto with _$NoteDto {
 //todo might
   factory NoteDto.fromFirestore(DocumentSnapshot doc) {
     ///copyWith is for populate ID
-    return NoteDto.fromJson(doc.data() as Map<String, dynamic>  ).copyWith(id: doc.id);
+    return NoteDto.fromJson(doc.data() as Map<String, dynamic>).copyWith(id: doc.id);
   }
 }
 ///convert DataTIme to ServerTimestamp

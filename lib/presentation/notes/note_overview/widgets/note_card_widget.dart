@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kt_dart/src/collection/kt_iterable.dart';
 import 'package:provider/src/provider.dart';
 import 'package:todo_flutter/application/notes/note_actor/note_actor_bloc.dart';
 import 'package:todo_flutter/domain/notes/note.dart';
 import 'package:todo_flutter/domain/notes/todo_item.dart';
+import 'package:todo_flutter/presentation/notes/note_form/note_form_page.dart';
 
 class NoteCard extends StatelessWidget {
   final Note note;
@@ -18,7 +20,7 @@ class NoteCard extends StatelessWidget {
       color: note.noteColor.getOrCrash(),
       child: InkWell(
         onTap: () {
-          //Navigator.pushReplacementNamed(context, NoteFormPage);
+          Navigator.pushReplacementNamed(context, NoteFormPage.id);
         },
         onLongPress: () {
 
@@ -41,8 +43,7 @@ class NoteCard extends StatelessWidget {
                   children: <Widget>[
                     ...note.maxListSize3.getOrCrash().map(
                           (todo) => TodoDisplay(todo: todo),
-                        )
-                    //todo might - deleted .interator
+                        ).iter
                   ],
                 )
               ]
