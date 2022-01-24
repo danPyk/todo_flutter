@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kt_dart/src/collection/kt_iterable.dart';
-import 'package:provider/src/provider.dart';
+import 'package:kt_dart/kt.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_flutter/application/notes/note_actor/note_actor_bloc.dart';
 import 'package:todo_flutter/domain/notes/note.dart';
 import 'package:todo_flutter/domain/notes/todo_item.dart';

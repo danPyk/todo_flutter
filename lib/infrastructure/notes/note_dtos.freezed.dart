@@ -47,7 +47,6 @@ const $NoteDto = _$NoteDtoTearOff();
 /// @nodoc
 mixin _$NoteDto {
   ///id will not contain id of document, so it is marked as ignore
-// ignore: invalid_annotation_target
   @JsonKey(ignore: true)
   String? get id => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
@@ -188,7 +187,6 @@ class _$_NoteDto extends _NoteDto {
   @override
 
   ///id will not contain id of document, so it is marked as ignore
-// ignore: invalid_annotation_target
   @JsonKey(ignore: true)
   final String? id;
   @override
@@ -256,7 +254,6 @@ abstract class _NoteDto extends NoteDto {
   @override
 
   ///id will not contain id of document, so it is marked as ignore
-// ignore: invalid_annotation_target
   @JsonKey(ignore: true)
   String? get id;
   @override

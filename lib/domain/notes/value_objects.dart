@@ -1,11 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:kt_dart/kt.dart';
 import 'package:todo_flutter/core/failures.dart';
 import 'package:todo_flutter/core/value_objects.dart';
 import 'package:todo_flutter/core/value_transfromers.dart';
 import 'package:todo_flutter/core/value_validators.dart';
-import 'package:todo_flutter/domain/notes/todo_item.dart';
-import 'package:kt_dart/kt.dart';
 
 
 class NoteBody extends ValueObject<String> {

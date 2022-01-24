@@ -24,7 +24,6 @@ const factory TodoItemPrimitive(
   ) = _TodoItemPrimitive;
 
 factory TodoItemPrimitive.empty(){
-  //todo might UniqueId be null
   return  TodoItemPrimitive(id: UniqueId(), name: '', done: false);
 }
 

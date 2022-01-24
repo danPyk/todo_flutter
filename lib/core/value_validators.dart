@@ -21,7 +21,6 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
 }
 
 /// NOTES VALIDATORS
-//todo MIGHT & SIMPLIFIED
 Either<ValueFailure<String>, String> validateNoteBody(
     String input, int maxLength) {
   return validateStringNotEmpty(input, maxLength);

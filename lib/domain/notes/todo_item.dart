@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -27,8 +26,8 @@ class TodoItem with _$TodoItem {
           done: false ,
       );
 /// retrieve value from TodoName
-  Option<ValueFailure<dynamic>> get failureOption{
-    return todoName.value.fold((l) => some(l), (r) => none());
+  Option<ValueFailure<dynamic>> get failureOption {
+    return todoName.value.fold((f) => some(f), (_) => none());
   }
 
 

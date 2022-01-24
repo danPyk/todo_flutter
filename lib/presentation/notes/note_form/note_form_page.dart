@@ -1,19 +1,17 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_flutter/application/notes/note_form/note_form_bloc.dart';
 import 'package:todo_flutter/domain/notes/note.dart';
+import 'package:todo_flutter/injection.dart';
+import 'package:todo_flutter/presentation/notes/note_form/misc/todo_item_presentation_classes.dart';
 import 'package:todo_flutter/presentation/notes/note_form/widgets/add_todo_tile_widget.dart';
 import 'package:todo_flutter/presentation/notes/note_form/widgets/body_field_widget.dart';
 import 'package:todo_flutter/presentation/notes/note_form/widgets/color_field_widget.dart';
 import 'package:todo_flutter/presentation/notes/note_form/widgets/todo_list_widget.dart';
 import 'package:todo_flutter/presentation/notes/note_overview/notes_overview_page.dart';
 import 'package:todo_flutter/presentation/widgets/global_snackbar.dart';
-
-import '../../../injection.dart';
-import 'misc/todo_item_presentation_classes.dart';
 
 class NoteFormPage extends StatelessWidget {
   final Note? editedNote;
@@ -132,7 +130,7 @@ class NoteFormPageScaffold extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: () {
               context.read<NoteFormBloc>().add(const NoteFormEvent.saved());
             },

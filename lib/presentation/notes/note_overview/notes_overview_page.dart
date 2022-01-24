@@ -9,13 +9,14 @@ import 'package:todo_flutter/injection.dart';
 import 'package:todo_flutter/presentation/notes/note_form/note_form_page.dart';
 import 'package:todo_flutter/presentation/notes/note_overview/widgets/notes_overview_body_widget.dart';
 import 'package:todo_flutter/presentation/notes/note_overview/widgets/uncompleted_switch.dart';
+import 'package:todo_flutter/presentation/sign_in/sign_in_page.dart';
 import 'package:todo_flutter/presentation/widgets/global_snackbar.dart';
 
 class NotesOverviewPage extends StatelessWidget {
   static String id = "notes_overview";
   final Note? note;
 
-  const NotesOverviewPage({Key? key,  this.note}) : super(key: key);
+  const NotesOverviewPage({Key? key, this.note}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +36,8 @@ class NotesOverviewPage extends StatelessWidget {
             listener: (context, state) {
               ///maybeMap allows ignore authenticated, we are only care about unauthenticated
               state.maybeMap(
-                unauthenticated: (_) => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => NoteFormPage(editedNote: note))),
+                unauthenticated: (_) =>
+                    Navigator.pushNamed(context, SignInPage.id),
                 orElse: () {},
               );
             },
@@ -49,7 +48,6 @@ class NotesOverviewPage extends StatelessWidget {
             listener: (context, state) {
               state.maybeMap(
                 deleteFailure: (state) {
-                  //todo might
                   GlobalSnackBar.show(
                     context,
                     state.noteFailure.map(
@@ -83,7 +81,6 @@ class NotesOverviewPage extends StatelessWidget {
           body: NotesOverviewBody(),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              //todo
               Navigator.pushNamed(context, NoteFormPage.id);
             },
             child: const Icon(Icons.add),

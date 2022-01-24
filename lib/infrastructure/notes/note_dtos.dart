@@ -1,17 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kt_dart/kt.dart';
 import 'package:todo_flutter/core/value_objects.dart';
 import 'package:todo_flutter/domain/notes/note.dart';
 import 'package:todo_flutter/domain/notes/todo_item.dart';
 import 'package:todo_flutter/domain/notes/value_objects.dart';
-import 'package:kt_dart/kt.dart';
 
 part 'note_dtos.freezed.dart';
-
 //4 json serializable
 part 'note_dtos.g.dart';
-
 @freezed
 class NoteDto with _$NoteDto {
   static FieldValue defaultServerTimeStamp = FieldValue.serverTimestamp();
@@ -51,7 +49,6 @@ class NoteDto with _$NoteDto {
       id: UniqueId.fromUniqueString(id!),
       noteBody: NoteBody(body),
       noteColor: NoteColor(Color(color)),
-      //todo might
       maxListSize3: ListMaxSize3(todos.map((dto) => dto.toDomain()).toImmutableList()),
     );
   }
@@ -59,10 +56,9 @@ class NoteDto with _$NoteDto {
   factory NoteDto.fromJson(Map<String, dynamic> json) =>
       _$NoteDtoFromJson(json);
 
-//todo might
   factory NoteDto.fromFirestore(DocumentSnapshot doc) {
     ///copyWith is for populate ID
-    return NoteDto.fromJson(doc.data() as Map<String, dynamic>).copyWith(id: doc.id);
+    return NoteDto.fromJson(doc.data()! as Map<String, dynamic>).copyWith(id: doc.id);
   }
 }
 ///convert DataTime to ServerTimestamp

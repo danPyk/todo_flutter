@@ -148,7 +148,7 @@ linter:
     # Conflicts with prefer_final_parameters
     #
     # http://dart-lang.github.io/linter/lints/avoid_final_parameters.html
-    - avoid_final_parameters
+    #- avoid_final_parameters
 
 
     # Prevents allocating a lambda and allows return/break/continue control flow statements inside the loop
@@ -538,13 +538,13 @@ linter:
     #
     # Linter v1.15
     # https://dart-lang.github.io/linter/lints/no_leading_underscores_for_library_prefixes.html
-    - no_leading_underscores_for_library_prefixes
+    #- no_leading_underscores_for_library_prefixes
 
     # private identifier prefixes don't exist, don't try to introduce concepts that have no effect
     #
     # Linter v1.15
     # https://dart-lang.github.io/linter/lints/no_leading_underscores_for_local_identifiers.html
-    - no_leading_underscores_for_local_identifiers
+    #- no_leading_underscores_for_local_identifiers
 
     # Flutter only: `createState` shouldn't pass information into the state
     #
@@ -857,7 +857,7 @@ linter:
     #
     # Linter v1.15
     # https://dart-lang.github.io/linter/lints/secure_pubspec_urls.html
-    - secure_pubspec_urls
+    #- secure_pubspec_urls
 
     # Flutter only, prefer SizedBox over Container which offers a const constructors
     # Dart SDK: >= 2.9.0-4.0.dev • (Linter v0.1.115)
@@ -869,7 +869,7 @@ linter:
     #
     # Linter v1.15
     # https://dart-lang.github.io/linter/lints/sized_box_shrink_expand.html
-    - sized_box_shrink_expand
+    #- sized_box_shrink_expand
 
     # Follow dart style use triple slashes
     #

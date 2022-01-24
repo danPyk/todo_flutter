@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_flutter/application/notes/note_watcher/note_watcher_bloc.dart';
+import 'package:todo_flutter/presentation/notes/note_overview/widgets/critical_failure_display_widget.dart';
+import 'package:todo_flutter/presentation/notes/note_overview/widgets/error_note_card_widget.dart';
 import 'package:todo_flutter/presentation/notes/note_overview/widgets/note_card_widget.dart';
 
-import 'critical_failure_display_widget.dart';
-import 'error_note_card_widget.dart';
 
 class NotesOverviewBody extends StatelessWidget {
   @override
@@ -23,7 +23,6 @@ class NotesOverviewBody extends StatelessWidget {
                 if (note.failureOption.isSome()) {
                   return ErrorNoteCard(note: note);
                 } else {
-                  //todo
                   return NoteCard(note: note);
                 }
               },

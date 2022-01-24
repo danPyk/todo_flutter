@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
-import 'package:kt_dart/src/collection/interop.dart';
-import 'package:kt_dart/collection.dart';
+import 'package:kt_dart/kt.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_flutter/application/notes/note_form/note_form_bloc.dart';
 import 'package:todo_flutter/domain/notes/value_objects.dart';
@@ -30,7 +29,7 @@ class TodoList extends StatelessWidget {
         builder: (context, formTodos, child) {
           return ImplicitlyAnimatedReorderableList<TodoItemPrimitive>(
             shrinkWrap: true,
-            removeDuration: const Duration(),
+            removeDuration:  Duration.zero,
             items: formTodos.value.asList(),
             areItemsTheSame: (oldItem, newItem) => oldItem.id == newItem.id,
             onReorderFinished: (item, from, to, newItems) {

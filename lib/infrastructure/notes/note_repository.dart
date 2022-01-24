@@ -78,7 +78,6 @@ class NoteRepository implements INoteRepository {
     }
   }
 
-//todo might
   @override
   Stream<Either<NoteFailure, KtList<Note>>> watchAll() async* {
     final userDoc = await _firestore.userDocument();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_flutter/domain/notes/note_failure.dart';
+import 'package:todo_flutter/presentation/widgets/global_snackbar.dart';
 
 class CriticalFailureDisplay extends StatelessWidget {
   final NoteFailure failure;
@@ -13,7 +14,6 @@ class CriticalFailureDisplay extends StatelessWidget {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           const Text(
             '😱',
@@ -29,7 +29,7 @@ class CriticalFailureDisplay extends StatelessWidget {
           ),
           MaterialButton(
             onPressed: () {
-              print('Sending email!');
+              GlobalSnackBar.show( context, "Message sent");
             },
             child: Row(
               mainAxisSize: MainAxisSize.min,

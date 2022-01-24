@@ -1,19 +1,16 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:freezed_annotation/freezed_annotation.dart";
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:todo_flutter/domain/notes/i_note_repository.dart';
 import 'package:todo_flutter/domain/notes/note.dart';
 import 'package:todo_flutter/domain/notes/note_failure.dart';
-import 'package:kt_dart/collection.dart';
 
 part 'note_watcher_bloc.freezed.dart';
-
 part 'note_watcher_event.dart';
-
 part 'note_watcher_state.dart';
 
 ///Watches notes from firestore

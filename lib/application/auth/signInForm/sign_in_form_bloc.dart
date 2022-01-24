@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todo_flutter/domain/auth/auth_failure.dart';
@@ -59,7 +59,6 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
           authFailureOrSuccess: optionOf(failureOrSuccess),
         ));
       },
-          //todo below block is diffrent by above by just one call -  await _iAuthFacade.signInWithEmailAndPassword, can be refatored to higher order function
           signInWithEmailAndPasswordPressed: (e) async {
         Either<AuthFailure, Unit>? failureOrSuccess;
 
