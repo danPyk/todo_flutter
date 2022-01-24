@@ -39,7 +39,7 @@ class TodoName extends ValueObject<String> {
 }
 
 class NoteColor extends ValueObject<Color> {
-  static const List<Color> predefinedColor = [
+  static const List<Color> predefinedColors = [
     Color(0xfffafafa), // canvas
     Color(0xfffa8072), // salmon
     Color(0xfffedc56), // mustard

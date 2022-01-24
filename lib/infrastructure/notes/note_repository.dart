@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kt_dart/kt.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:todo_flutter/domain/notes/i_note_repository.dart';
 import 'package:todo_flutter/domain/notes/note.dart';
 import 'package:todo_flutter/domain/notes/note_failure.dart';
 import 'package:todo_flutter/infrastructure/core/firestore_helpers.dart';
 import 'package:todo_flutter/infrastructure/notes/note_dtos.dart';
-import 'package:kt_dart/kt.dart';
 
 ///firebase structure
 ///users/{user ID}/notes/{note ID (todos as array ToDoo objects]
 
-///register as INoteRepository type allows to whenever request INoteReposiotory using injectable then retrieve NoteReposiotory
+///register as INoteRepository type allows to whenever request INoteRepository using injectable then retrieve NoteReposiotory
 @LazySingleton(as: INoteRepository)
 class NoteRepository implements INoteRepository {
   late final FirebaseFirestore _firestore;
@@ -87,11 +87,11 @@ class NoteRepository implements INoteRepository {
         .snapshots()
         .map(
           (snapshot) => right<NoteFailure, KtList<Note>>(
-        snapshot.docs
-            .map((doc) => NoteDto.fromFirestore(doc).toDomain())
-            .toImmutableList(),
-      ),
-    )
+            snapshot.docs
+                .map((doc) => NoteDto.fromFirestore(doc).toDomain())
+                .toImmutableList(),
+          ),
+        )
         .onErrorReturnWith((e, st) {
       if (e is FirebaseException && e.message!.contains('PERMISSION_DENIED')) {
         return left(const NoteFailure.insufficientPermission());
@@ -100,25 +100,30 @@ class NoteRepository implements INoteRepository {
       }
     });
   }
+
   @override
   Stream<Either<NoteFailure, KtList<Note>>> watchUncompleted() async* {
     final userDoc = await _firestore.userDocument();
     yield* userDoc.noteCollection
         //.orderBy('serverTimeStamp', descending: true)
         .snapshots()
-    ///map to note
+
+        ///map to note
         .map(
           (snapshot) =>
-          snapshot.docs.map((doc) => NoteDto.fromFirestore(doc).toDomain()),
-    )///filter results
+              snapshot.docs.map((doc) => NoteDto.fromFirestore(doc).toDomain()),
+        )
+
+        ///filter results
         .map(
           (notes) => right<NoteFailure, KtList<Note>>(
-        notes
-            .where((note) =>
-            note.maxListSize3.getOrCrash().any((todoItem) => !todoItem.done))
-            .toImmutableList(),
-      ),
-    )
+            notes
+                .where((note) => note.maxListSize3
+                    .getOrCrash()
+                    .any((todoItem) => !todoItem.done))
+                .toImmutableList(),
+          ),
+        )
         .onErrorReturnWith((e, st) {
       if (e is FirebaseException && e.message!.contains('PERMISSION_DENIED')) {
         return left(const NoteFailure.insufficientPermission());

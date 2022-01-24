@@ -21,15 +21,13 @@ class NoteDto with _$NoteDto {
 
   const factory NoteDto({
     ///id will not contain id of document, so it is marked as ignore
-    //todo in orignial code this parameter is ommited by using json annotation
-     String? id,
+    // ignore: invalid_annotation_target
+       @JsonKey(ignore: true)  String? id,
     required String body,
     required int color,
     required List<TodoItemDto> todos,
-
-    ///used to sort todos by date. Will be provided by firestore?
-    //todo might be wrong
-    @ServerTimestampConverter() required FieldValue? serverTimeStamp,
+    ///used to sort todos by date.
+     @ServerTimestampConverter() required FieldValue? serverTimeStamp,
   }) = _NoteDto;
 
   factory NoteDto.fromDomain(Note note) {
@@ -47,9 +45,10 @@ class NoteDto with _$NoteDto {
     );
   }
 
+
   Note toDomain() {
     return Note(
-      id: UniqueId.fromString(id!),
+      id: UniqueId.fromUniqueString(id!),
       noteBody: NoteBody(body),
       noteColor: NoteColor(Color(color)),
       //todo might
@@ -66,7 +65,7 @@ class NoteDto with _$NoteDto {
     return NoteDto.fromJson(doc.data() as Map<String, dynamic>).copyWith(id: doc.id);
   }
 }
-///convert DataTIme to ServerTimestamp
+///convert DataTime to ServerTimestamp
 class ServerTimestampConverter implements JsonConverter<FieldValue?, Object> {
   const ServerTimestampConverter();
 

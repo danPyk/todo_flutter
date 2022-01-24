@@ -20,7 +20,7 @@ class NoteCard extends StatelessWidget {
       color: note.noteColor.getOrCrash(),
       child: InkWell(
         onTap: () {
-          Navigator.pushReplacementNamed(context, NoteFormPage.id);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => NoteFormPage(editedNote: note,)));
         },
         onLongPress: () {
 

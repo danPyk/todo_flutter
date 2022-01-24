@@ -7,7 +7,6 @@ part of 'note_dtos.dart';
 // **************************************************************************
 
 _$_NoteDto _$$_NoteDtoFromJson(Map<String, dynamic> json) => _$_NoteDto(
-      id: json['id'] as String?,
       body: json['body'] as String,
       color: json['color'] as int,
       todos: (json['todos'] as List<dynamic>)
@@ -19,10 +18,9 @@ _$_NoteDto _$$_NoteDtoFromJson(Map<String, dynamic> json) => _$_NoteDto(
 
 Map<String, dynamic> _$$_NoteDtoToJson(_$_NoteDto instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'body': instance.body,
       'color': instance.color,
-      'todos': instance.todos,
+      'todos': instance.todos.map((e) => e.toJson()).toList(),
       'serverTimeStamp':
           const ServerTimestampConverter().toJson(instance.serverTimeStamp),
     };

@@ -54,7 +54,7 @@ class NoteFormBloc extends Bloc<NoteFormEvent, NoteFormState> {
             state.copyWith(isSaving: true, saveFailureOrSuccessOption: none()));
 
         ///if there's no error, create note
-        if (state.note.failureOption.isNone()) {
+        if (state.note.failureOption.isNone() != null) {
           failureOrSuccess = state.isEditing
               ? await _iNoteRepository.update(state.note)
               : await _iNoteRepository.create(state.note);

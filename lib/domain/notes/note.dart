@@ -22,7 +22,7 @@ class Note with _$Note {
   factory Note.empty() => Note(
         id: UniqueId(),
         noteBody: NoteBody(''),
-        noteColor: NoteColor(NoteColor.predefinedColor[0]),
+        noteColor: NoteColor(NoteColor.predefinedColors[0]),
         maxListSize3: ListMaxSize3(emptyList()),
       );
 
